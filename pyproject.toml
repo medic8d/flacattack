@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flacattack"
+version = "0.1.0"
+description = "FLAC → 6+ stems via GPU + cloud buckets. FAST af."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["audio", "stems", "demucs", "s3", "gpu", "flac"]
+dependencies = [
+    "boto3>=1.34",
+    "click>=8.1",
+    "demucs>=4.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-mock>=3.14",
+    "moto[s3]>=5.0",
+]
+
+[project.scripts]
+flacattack = "flacattack.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["flacattack*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
